@@ -1,10 +1,21 @@
+import Header from '@/components/header'
 import { Button } from '@/components/ui/button'
-import Image from 'next/image'
 
 export default function Home() {
   return (
-    <div>
-      <Button>Click me</Button>
+    <div className="flex flex-col min-h-screen">
+
+      {/* Header */}
+      <Header />
+      {/* hearo */}
+
+      {/* how it works */}
+
+      {/* browse the items*/}
+
+
+      {/* footer */}
+
     </div>
   )
 }
