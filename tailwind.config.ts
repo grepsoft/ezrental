@@ -19,6 +19,9 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        'hero': "url('/hero-image.png')"
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },

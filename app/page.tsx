@@ -1,4 +1,5 @@
 import Header from '@/components/header'
+import Hero from '@/components/hero'
 import { Button } from '@/components/ui/button'
 
 export default function Home() {
@@ -7,8 +8,10 @@ export default function Home() {
 
       {/* Header */}
       <Header />
-      {/* hearo */}
 
+      {/* hero */}
+      <Hero />
+      
       {/* how it works */}
 
       {/* browse the items*/}
