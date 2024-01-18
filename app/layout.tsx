@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter as FontSans } from "next/font/google"
 import './globals.css'
 import { cn } from '@/lib/utils'
+import AuthSessionProvider from './auth/auth-session-provider'
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -23,7 +24,12 @@ export default function RootLayout({
       className={cn(
           "min-h-screen flex flex-col bg-background font-sans antialiased",
           fontSans.variable
-        )}>{children}</body>
+        )}>
+          <AuthSessionProvider>
+            {children}
+          </AuthSessionProvider>
+
+        </body>
     </html>
   )
 }
