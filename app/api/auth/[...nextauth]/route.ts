@@ -10,7 +10,8 @@ import { Adapter } from "next-auth/adapters";
 declare module 'next-auth' {
     interface Session {
         user: {
-            id: string
+            id: string,
+            name: string
         }
     }
 }

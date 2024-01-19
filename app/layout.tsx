@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google"
 import './globals.css'
 import { cn } from '@/lib/utils'
 import AuthSessionProvider from './auth/auth-session-provider'
+import { Toaster } from "@/components/ui/sonner"
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
         )}>
           <AuthSessionProvider>
             {children}
+            <Toaster />
           </AuthSessionProvider>
 
         </body>

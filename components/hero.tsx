@@ -3,8 +3,13 @@ import Link from 'next/link'
 import React from 'react'
 import { buttonVariants } from './ui/button'
 import Image from 'next/image'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-function Hero() {
+async function Hero() {
+
+    const session = await getServerSession(authOptions)
+
     return (
         <div className='py-48 sm:py-0'>
             <div className="flex items-center justify-between sm:py-48 sm:bg-hero bg-cover bg-no-repeat bg-center">
@@ -19,8 +24,8 @@ function Hero() {
                     <Link 
                     className={cn(buttonVariants(), 
                         "mt-10 font-semibold shadow-md hover:shadow-none")}
-                    href='#'
-                    >Shart Now &rarr;</Link>
+                    href={`${session ? '/my-listings' : 'api/auth/signin'}`}
+                    >Start Now &rarr;</Link>
                 </div>
 
                 <Image 
