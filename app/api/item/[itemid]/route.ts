@@ -1,6 +1,8 @@
+import { storageRef } from "@/lib/firebase";
 import { connectToDB } from "@/lib/mongodb";
 import { ItemModel } from "@/schemas/item";
 import { Item, ItemStatus } from "@/types";
+import { deleteObject } from "firebase/storage";
 import { NextResponse } from "next/server";
 
 // delete
@@ -17,8 +19,15 @@ export async function DELETE(
         let deleteResult = await ItemModel.findByIdAndDelete(itemid)
     
         if (deleteResult) {
-    
+            let item = (deleteResult as unknown) as Item
             /* make sure to delete the photos */
+            
+            if (item.photos) {
+                await Promise.all(item.photos.map(async photo => {
+                    const ref = storageRef(photo)
+                    await deleteObject(ref)
+                }))
+            }
     
             return NextResponse.json({
                 message: "item deleted"

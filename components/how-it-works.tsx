@@ -14,11 +14,11 @@ function HowItWorks() {
                 secondary="Yes, that&apos; right! There is no fee to list your item."
             />
             <ListItem count={2} 
-                primary="List your items for free"
+                primary="Set your price"
                 secondary="You are in complete control of the pricing."
             />
             <ListItem count={3} 
-                primary="List your items for free"
+                primary="Sit back and start earning"
                 secondary="Earn while you sit on a beach or go on a vacation."
             />
         </List>

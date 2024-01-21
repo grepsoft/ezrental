@@ -14,21 +14,8 @@ import {
   
 import { Button } from '@/components/ui/button'
 import { useMyListingStore } from '../my-listing-store'
+import { itemCategories } from '@/data'
 
-export const itemCategories = [
-    {
-        display: 'Camera gear',
-        name: 'camera-gear'
-    },
-    {
-        display: 'Power tools',
-        name: 'power-tools'
-    },
-    {
-        display: 'House tools',
-        name: 'house-tools'
-    }
-]
 const FormSchema = z.object({
     itemcategory: z.string().min(1, {
         message: 'Item category is required.'

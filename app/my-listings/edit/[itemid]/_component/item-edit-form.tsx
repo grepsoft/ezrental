@@ -11,9 +11,10 @@ import { Switch } from "@/components/ui/switch"
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { itemCategories } from '@/app/my-listings/_component/item-category'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
+import ImageDropZone from '@/components/imageDropZone'
+import { itemCategories } from '@/data'
 
 const FormSchema = z.object({
     status: z.boolean(),
@@ -78,6 +79,20 @@ function ItemEditForm({
         } else {
             toast.error("Failed to update item.")
         }
+    }
+
+    const handleFileAdd = async (filesToUpload: string[]) => {
+
+        const newPhotos = [...form.getValues('photos'), ...filesToUpload]
+        form.setValue('photos', newPhotos)
+
+        await onSubmit(form.getValues())
+    }
+
+    const handleFileDelete = async (url: string) => {
+        const updatedPhotos = form.getValues('photos').filter(photo => photo !== url)
+        form.setValue('photos', updatedPhotos)
+        await onSubmit(form.getValues())
     }
 
     return (
@@ -211,7 +226,17 @@ function ItemEditForm({
                             )}
                         />
                     </div>
+                    
+                    {/* photos */}
+                    <div className='flex flex-wrap gap-2'>
+                        <ImageDropZone
+                            photos={form.getValues('photos')}
+                            onFileDelete={handleFileDelete}
+                            onFilesAdded={handleFileAdd}
+                         />
+                    </div>
 
+                    
                     {/* submit */}
                     <div className="py-4">
                         <Button disabled={!form.formState.isDirty}

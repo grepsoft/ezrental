@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import Image from 'next/image'
+import { ImageIcon } from 'lucide-react'
 
 function SingleListing({
     listings
@@ -51,12 +53,21 @@ function SingleListing({
                 listings.map((item) => (
                     <div key={item._id} className="flex gap-4 py-1 pb-1 shadow-md">
 
-                        {/* TODO: photo */}
+                        {/* photo */}
+                        <div>
+                            {
+                                item.photos.length > 0 ?
+                                <Image className='rounded-md' width={100} height={100}
+                                alt={item.name} src={`${item.photos.at(0)}`} />
+                                :
+                                <ImageIcon width={100} height={100} className='text-slate-200' />
+                            }
+                        </div>
                         <div className="flex flex-col justify-center spacey-y-1">
                             <p className='text-2xl sm:text-xl font-bold capitalize'>{item.name}</p>
                             <Badge
                                 className={`${item.status === ItemStatus.LISTED ?
-                                    'bg-green-500' : 'bg-red-500'} text-white w-20 uppercase text-center`}
+                                    'bg-green-500' : 'bg-red-500'} text-white w-20 uppercase flex justify-center`}
                             >{item.status}</Badge>
 
                             <div className="flex gap-4">

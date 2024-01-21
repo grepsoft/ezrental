@@ -15,9 +15,14 @@ import { ItemModel } from '@/schemas/item'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import SingleListing from './_component/single-listing'
+import { redirect, useRouter } from 'next/navigation'
 
 async function MyListingsPage() {
     const session = await getServerSession(authOptions)
+
+    if (!session) {
+        redirect('/api/auth/signin')
+    }
 
     const myListings = await ItemModel.find({
         hostid: session?.user.id
